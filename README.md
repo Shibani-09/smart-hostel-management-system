@@ -317,7 +317,7 @@ It improves communication, enhances security, reduces paperwork, and creates a s
 
 <div align="center">
 
-# ❤️ Crafted by Shibani Mukherjee
+#  Crafted by Shibani Mukherjee
 
 ### Full Stack Developer • UI/UX Enthusiast • Future Tech Entrepreneur
 
