@@ -1,10 +1,38 @@
-import Layout from "../components/Layout";
-import DashboardCard from "../components/DashboardCard";
+import { motion } from 'framer-motion';
+import { FiCheckCircle, FiAlertCircle, FiBell, FiArrowRight } from 'react-icons/fi';
+import { useNavigate } from 'react-router-dom';
+import Layout from '../components/layouts/Layout';
+import StatCard from '../components/cards/StatCard';
+import FeatureCard from '../components/cards/FeatureCard';
+import ActivityCard from '../components/cards/ActivityCard';
+import Card from '../components/ui/Card';
+import Button from '../components/ui/Button';
+import DashboardCard from '../components/DashboardCard';
 
 function WardenDashboard() {
+  const navigate = useNavigate();
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+  };
+
   return (
-    <Layout>
-      <div className="space-y-8">
+    <Layout role="warden">
+      <motion.div
+        className="space-y-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <section className="rounded-[2rem] border border-white/10 bg-slate-900/80 p-8 shadow-2xl shadow-indigo-500/10 backdrop-blur-xl">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
@@ -88,7 +116,7 @@ function WardenDashboard() {
             </div>
           </div>
         </section>
-      </div>
+      </motion.div>
     </Layout>
   );
 }

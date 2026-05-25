@@ -1,15 +1,13 @@
-function DashboardCard({ title, value, icon, color }) {
+function DashboardCard({ title, value, icon }) {
   return (
-    <div
-      className={`group rounded-[2rem] border border-white/10 p-6 shadow-2xl shadow-indigo-500/10 backdrop-blur-xl transition duration-300 hover:-translate-y-1 ${color}`}
-    >
+    <div className="rounded-xl border border-gray-100 p-6 shadow-sm bg-white">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-slate-300">{title}</h2>
-          <p className="mt-4 text-4xl font-semibold text-white">{value}</p>
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500">{title}</h3>
+          <p className="mt-3 text-3xl font-bold text-gray-900">{value}</p>
         </div>
 
-        <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-white/10 text-4xl text-white shadow-lg shadow-black/20">
+        <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-primary text-white text-2xl shadow-md">
           {icon}
         </div>
       </div>

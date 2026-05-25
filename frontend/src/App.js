@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { AnimatePresence } from 'framer-motion';
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -8,14 +9,17 @@ import AdminUsers from "./pages/AdminUsers";
 import GatePass from "./pages/GatePass";
 import Notices from "./pages/Notices";
 import Complaint from "./pages/Complaint";
+import Rooms from "./pages/Rooms";
 import WardenGatePassApproval from "./pages/WardenGatePassApproval";
 import WardenComplaints from "./pages/WardenComplaints";
 import ProtectedRoute from "./components/ProtectedRoute";
 
-function App() {
+function AnimatedRoutes() {
+  const location = useLocation();
+
   return (
-    <BrowserRouter>
-      <Routes>
+    <AnimatePresence mode="wait">
+      <Routes location={location} key={location.pathname}>
         {/* Login page */}
         <Route path="/" element={<Login />} />
 
@@ -88,6 +92,14 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/rooms"
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <Rooms />
+            </ProtectedRoute>
+          }
+        />
         <Route 
           path="/gatepass-approval"
           element={
@@ -108,6 +120,14 @@ function App() {
         {/* Catch all - redirect to login */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
+    </AnimatePresence>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AnimatedRoutes />
     </BrowserRouter>
   );
 }

@@ -1,119 +1,228 @@
-import Layout from "../components/Layout";
-import DashboardCard from "../components/DashboardCard";
-import { useNavigate } from "react-router-dom";
+import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
+import { FiArrowRight, FiFileText, FiBell, FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
+import Layout from '../components/layouts/Layout';
+import StatCard from '../components/cards/StatCard';
+import FeatureCard from '../components/cards/FeatureCard';
+import ActivityCard from '../components/cards/ActivityCard';
+import Card from '../components/ui/Card';
+import Button from '../components/ui/Button';
 
 function StudentDashboard() {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user")) || {};
+  const user = JSON.parse(localStorage.getItem('user')) || {};
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.3 },
+    },
+  };
 
   return (
-    <Layout>
-      <div className="space-y-8">
-        <section className="rounded-[2rem] border border-white/10 bg-slate-900/80 p-8 shadow-2xl shadow-indigo-500/10 backdrop-blur-xl">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-            <div>
-              <p className="text-sm uppercase tracking-[0.35em] text-indigo-300">Welcome back</p>
-              <h1 className="mt-4 text-4xl font-semibold text-white">{user.name || "Student"}</h1>
-              <p className="mt-3 max-w-2xl text-slate-300">
-                Your Smart Hostel dashboard gives you the fastest access to gate passes, notices, and complaint workflows from a polished, modern workspace.
-              </p>
-            </div>
-
-            <div className="rounded-[1.8rem] bg-gradient-to-br from-indigo-500/20 to-fuchsia-500/10 p-6 shadow-lg shadow-indigo-500/10">
-              <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Role</p>
-              <p className="mt-3 text-3xl font-semibold text-white capitalize">{user.role || "student"}</p>
-              <div className="mt-4 inline-flex rounded-full bg-slate-950/80 px-4 py-2 text-sm text-slate-200 ring-1 ring-white/10">
-                Active student account
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-          <DashboardCard
-            title="Active Gate Passes"
-            value="2 Pending"
-            icon="🚪"
-            color="bg-gradient-to-br from-blue-500 to-indigo-600"
-          />
-          <DashboardCard
-            title="Open Complaints"
-            value="1 Open"
-            icon="⚠️"
-            color="bg-gradient-to-br from-fuchsia-500 to-purple-600"
-          />
-          <DashboardCard
-            title="New Notices"
-            value="4 Today"
-            icon="📢"
-            color="bg-gradient-to-br from-emerald-500 to-cyan-500"
-          />
-          <DashboardCard
-            title="Profile Status"
-            value="Verified"
-            icon="👨‍🎓"
-            color="bg-gradient-to-br from-violet-500 to-pink-600"
-          />
-        </section>
-
-        <section className="grid gap-6 lg:grid-cols-[1.3fr_0.9fr]">
-          <div className="rounded-[2rem] border border-white/10 bg-slate-900/80 p-8 shadow-2xl shadow-indigo-500/10 backdrop-blur-xl">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <Layout role="student">
+      <motion.div
+        className="space-y-8"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        {/* Welcome Header */}
+        <motion.div variants={itemVariants}>
+          <Card variant="elevated">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
               <div>
-                <h2 className="text-2xl font-semibold text-white">Quick Actions</h2>
-                <p className="mt-2 text-slate-400">Navigate to your most important student workflows.</p>
+                <p className="text-sm text-slate-400 uppercase tracking-wide font-semibold">Welcome back</p>
+                <h1 className="text-4xl font-bold text-slate-100 mt-2">{user.name || 'Student'}</h1>
+                <p className="text-slate-400 mt-3 max-w-lg">
+                  Manage your hostel requests, stay updated with notices, and track your submissions all in one place.
+                </p>
               </div>
-            </div>
 
-            <div className="mt-8 grid gap-4 sm:grid-cols-3">
-              <button
-                onClick={() => navigate("/gatepass")}
-                className="rounded-3xl bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-blue-500/20 transition hover:-translate-y-0.5"
+              <motion.div
+                className="flex flex-col items-center justify-center p-6 rounded-xl bg-gradient-to-br from-primary-500/10 to-primary-600/10 border border-primary-500/20"
+                whileHover={{ scale: 1.05 }}
               >
-                Apply Gate Pass
-              </button>
-              <button
-                onClick={() => navigate("/complaint")}
-                className="rounded-3xl bg-gradient-to-r from-rose-500 to-fuchsia-500 px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-rose-500/20 transition hover:-translate-y-0.5"
-              >
-                Submit Complaint
-              </button>
-              <button
-                onClick={() => navigate("/notices")}
-                className="rounded-3xl bg-gradient-to-r from-emerald-500 to-cyan-500 px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-emerald-500/20 transition hover:-translate-y-0.5"
-              >
-                View Notices
-              </button>
+                <p className="text-sm text-slate-400">Your Status</p>
+                <p className="text-2xl font-bold text-success-400 mt-1">Active</p>
+                <p className="text-xs text-slate-500 mt-2">Room Assigned</p>
+              </motion.div>
             </div>
+          </Card>
+        </motion.div>
+
+        {/* Statistics */}
+        <motion.div variants={itemVariants}>
+          <h2 className="text-2xl font-bold text-slate-100 mb-4">Quick Overview</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <StatCard
+              title="Gate Passes"
+              value="2"
+              subtitle="Pending Approval"
+              icon={FiArrowRight}
+              color="primary"
+              trend="3 this month"
+            />
+            <StatCard
+              title="Complaints"
+              value="1"
+              subtitle="Open"
+              icon={FiAlertCircle}
+              color="warning"
+              trend="Avg 2 days response"
+            />
+            <StatCard
+              title="New Notices"
+              value="5"
+              subtitle="This Week"
+              icon={FiBell}
+              color="info"
+              trend="View all"
+            />
+            <StatCard
+              title="Profile Status"
+              value="100%"
+              subtitle="Complete"
+              icon={FiCheckCircle}
+              color="success"
+              trend="Verified"
+            />
           </div>
+        </motion.div>
 
-          <div className="rounded-[2rem] border border-white/10 bg-slate-900/80 p-8 shadow-2xl shadow-indigo-500/10 backdrop-blur-xl">
-            <div className="flex items-center justify-between gap-4">
-              <div>
-                <h2 className="text-2xl font-semibold text-white">Recent Activity</h2>
-                <p className="mt-2 text-slate-400">Your latest hostel interactions at a glance.</p>
-              </div>
-            </div>
-
-            <div className="mt-8 space-y-4">
-              <article className="rounded-3xl border border-white/10 bg-slate-950/80 p-5 transition hover:border-indigo-500/30">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="font-semibold text-white">Gate pass approved</p>
-                  <span className="rounded-full bg-emerald-500/15 px-3 py-1 text-sm text-emerald-300">Completed</span>
-                </div>
-                <p className="mt-3 text-sm leading-6 text-slate-400">Your recent gate pass was approved by the warden. You can now collect your pass from the hostel office.</p>
-              </article>
-              <article className="rounded-3xl border border-white/10 bg-slate-950/80 p-5 transition hover:border-indigo-500/30">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="font-semibold text-white">New notice received</p>
-                  <span className="rounded-full bg-indigo-500/15 px-3 py-1 text-sm text-indigo-200">Notice</span>
-                </div>
-                <p className="mt-3 text-sm leading-6 text-slate-400">A new hostel maintenance notice was published. Check the notices page for full details.</p>
-              </article>
-            </div>
+        {/* Quick Actions */}
+        <motion.div variants={itemVariants}>
+          <h2 className="text-2xl font-bold text-slate-100 mb-4">Quick Actions</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <FeatureCard
+              title="Request Gate Pass"
+              description="Apply for an out-pass to leave the hostel premises"
+              icon={FiArrowRight}
+              path="/gatepass"
+              color="primary"
+              badge="Popular"
+            />
+            <FeatureCard
+              title="File Complaint"
+              description="Report issues or concerns to the management"
+              icon={FiAlertCircle}
+              path="/complaint"
+              color="warning"
+            />
+            <FeatureCard
+              title="View Notices"
+              description="Stay updated with important hostel announcements"
+              icon={FiBell}
+              path="/notices"
+              color="info"
+            />
           </div>
-        </section>
-      </div>
+        </motion.div>
+
+        {/* Recent Activity */}
+        <motion.div
+          className="grid gap-6 lg:grid-cols-[1fr_1fr]"
+          variants={itemVariants}
+        >
+          {/* Recent Gate Pass */}
+          <Card variant="default">
+            <h3 className="text-lg font-bold text-slate-100 mb-4">Recent Gate Pass</h3>
+            <div className="space-y-3">
+              <ActivityCard
+                title="Gate Pass Approved"
+                description="Your request to visit home was approved"
+                timestamp="2 hours ago"
+                status="approved"
+                icon={FiCheckCircle}
+                action="View Details"
+              />
+              <ActivityCard
+                title="Gate Pass Pending"
+                description="Waiting for warden's approval"
+                timestamp="5 hours ago"
+                status="pending"
+                icon={FiArrowRight}
+              />
+            </div>
+          </Card>
+
+          {/* Recent Complaints */}
+          <Card variant="default">
+            <h3 className="text-lg font-bold text-slate-100 mb-4">Recent Complaints</h3>
+            <div className="space-y-3">
+              <ActivityCard
+                title="Water Supply Issue"
+                description="Reported water leakage in room"
+                timestamp="1 day ago"
+                status="pending"
+                icon={FiAlertCircle}
+                action="View Details"
+              />
+              <ActivityCard
+                title="WiFi Not Working"
+                description="Internet connectivity issue resolved"
+                timestamp="3 days ago"
+                status="completed"
+                icon={FiCheckCircle}
+              />
+            </div>
+          </Card>
+        </motion.div>
+
+        {/* Latest Notices */}
+        <motion.div variants={itemVariants}>
+          <Card variant="default">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-bold text-slate-100">Latest Notices</h3>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => navigate('/notices')}
+              >
+                View All
+              </Button>
+            </div>
+
+            <div className="space-y-3">
+              {[
+                {
+                  title: 'Hostel Cleaning Schedule',
+                  date: 'Today',
+                },
+                {
+                  title: 'Fee Submission Deadline Extended',
+                  date: 'Yesterday',
+                },
+                {
+                  title: 'Guest Visiting Hours Updated',
+                  date: '2 days ago',
+                },
+              ].map((notice, idx) => (
+                <motion.div
+                  key={idx}
+                  className="p-3 rounded-lg bg-slate-800/30 border border-slate-700/30 hover:border-slate-600/50 transition-colors cursor-pointer"
+                  whileHover={{ x: 4 }}
+                >
+                  <p className="text-sm font-medium text-slate-200">{notice.title}</p>
+                  <p className="text-xs text-slate-500 mt-1">{notice.date}</p>
+                </motion.div>
+              ))}
+            </div>
+          </Card>
+        </motion.div>
+      </motion.div>
     </Layout>
   );
 }

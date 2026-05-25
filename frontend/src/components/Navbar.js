@@ -1,51 +1,57 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { FiMenu, FiBell, FiLogOut, FiUser } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 
 function Navbar({ setSidebarOpen }) {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("user")) || {};
+  const user = JSON.parse(localStorage.getItem('user')) || {};
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    navigate("/");
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/');
   };
 
   return (
-    <header className="flex items-center justify-between gap-4 rounded-b-[2rem] border-b border-white/10 bg-slate-950/80 px-4 py-4 shadow-2xl shadow-black/20 backdrop-blur-xl md:px-6">
-      <div className="flex items-center gap-3">
+    <motion.header
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="flex items-center justify-between gap-4 px-4 py-4 md:px-6"
+    >
+      <div className="flex items-center gap-4">
         <button
-          type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/90 text-slate-100 transition hover:bg-slate-800 md:hidden"
+          aria-label="open menu"
           onClick={() => setSidebarOpen(true)}
+          className="md:hidden inline-flex items-center justify-center h-11 w-11 rounded-xl bg-white/10 text-white/90 hover:bg-white/20 smooth-transition"
         >
-          ☰
+          <FiMenu size={20} />
         </button>
 
-        <div className="rounded-3xl bg-slate-900/90 px-4 py-3 text-sm text-slate-200 shadow-lg shadow-black/20">
-          <p className="text-slate-400">Hostel Control Center</p>
-          <p className="mt-1 text-base font-semibold text-white">Dashboard Overview</p>
+        <div className="rounded-extra px-4 py-3 glass">
+          <p className="text-sm text-primary/80 font-semibold">Smart Hostel</p>
+          <p className="text-xs text-gray-600">College Management</p>
         </div>
       </div>
 
       <div className="flex items-center gap-3">
-        <button className="inline-flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-slate-900/90 text-slate-200 transition hover:border-indigo-300 hover:text-white">
-          🔔
+        <button className="inline-flex items-center justify-center h-11 w-11 rounded-xl bg-white/10 text-white smooth-transition hover:bg-white/20">
+          <FiBell size={18} />
         </button>
 
-        <div className="hidden rounded-3xl bg-slate-900/90 px-4 py-3 shadow-lg shadow-black/20 md:block">
-          <p className="text-xs uppercase tracking-[0.3em] text-indigo-300">{user.role || "student"}</p>
-          <p className="mt-1 text-sm font-semibold text-white">{user.name || "Guest User"}</p>
+        <div className="hidden md:flex items-center gap-3 rounded-extra px-4 py-2 glass">
+          <FiUser className="text-primary" />
+          <div>
+            <p className="text-sm font-semibold text-gray-800">{user.name || 'Guest'}</p>
+            <p className="text-xs text-gray-600">{user.role || 'student'}</p>
+          </div>
         </div>
 
-        <button
-          type="button"
-          onClick={handleLogout}
-          className="hidden rounded-3xl bg-gradient-to-r from-indigo-500 to-fuchsia-500 px-4 py-3 text-sm font-semibold text-white transition hover:opacity-90 md:inline-flex"
-        >
-          Logout
+        <button onClick={handleLogout} className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-extra bg-primary text-white">
+          <FiLogOut /> Logout
         </button>
       </div>
-    </header>
+    </motion.header>
   );
 }
 

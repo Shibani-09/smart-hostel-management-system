@@ -1,8 +1,366 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ===== ROOT CONFIG ===== */
+:root {
+color-scheme: dark;
+}
+
+/* ===== BASE STYLES ===== */
+
+* {
+  @apply transition-colors duration-200;
+  }
+
+html {
+scroll-behavior: smooth;
+}
+
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
+@apply bg-slate-950 text-slate-50 font-sans antialiased;
+margin: 0;
+background-image: linear-gradient(
+135deg,
+#0b0b0b 0%,
+#111827 50%,
+#0f172a 100%
+);
+min-height: 100vh;
+}
+
+#root {
+@apply w-full min-h-screen;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1 {
+@apply text-4xl font-bold tracking-tight;
+}
+
+h2 {
+@apply text-3xl font-bold tracking-tight;
+}
+
+h3 {
+@apply text-2xl font-semibold tracking-tight;
+}
+
+h4 {
+@apply text-xl font-semibold tracking-tight;
+}
+
+h5 {
+@apply text-lg font-semibold tracking-tight;
+}
+
+h6 {
+@apply text-base font-semibold tracking-tight;
+}
+
+p {
+@apply text-slate-300 leading-relaxed;
+}
+
+a {
+@apply text-blue-400 hover:text-blue-300 font-medium transition-colors;
+}
+
+/* ===== GLASSMORPHISM COMPONENTS ===== */
+.glass {
+@apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl;
+}
+
+.glass-md {
+@apply bg-white/5 backdrop-blur-md border border-white/10 rounded-lg;
+}
+
+.glass-sm {
+@apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-md;
+}
+
+.glass-lg {
+@apply bg-white/10 backdrop-blur-2xl border border-white/10 rounded-2xl;
+}
+
+/* ===== CARD STYLES ===== */
+.card {
+@apply bg-gradient-to-br from-slate-800/50 to-slate-900/50 border border-slate-700/50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300;
+}
+
+.card-interactive {
+@apply card cursor-pointer hover:border-slate-600/50 hover:shadow-2xl hover:shadow-blue-500/10;
+}
+
+.card-minimal {
+@apply bg-slate-900/30 border border-slate-800/30 rounded-lg p-4;
+}
+
+/* ===== BUTTON STYLES ===== */
+.btn-base {
+@apply inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-primary {
+@apply btn-base bg-blue-500 text-white hover:bg-blue-600 shadow-lg hover:shadow-xl hover:shadow-blue-500/30 active:scale-95;
+}
+
+.btn-secondary {
+@apply btn-base bg-slate-700 text-slate-100 hover:bg-slate-600 active:scale-95;
+}
+
+.btn-outline {
+@apply btn-base border border-slate-600 text-slate-300 hover:bg-slate-800 hover:border-slate-500 active:scale-95;
+}
+
+.btn-ghost {
+@apply btn-base text-slate-400 hover:bg-slate-800/50 hover:text-slate-300 active:scale-95;
+}
+
+.btn-sm {
+@apply px-3 py-1.5 text-sm;
+}
+
+.btn-md {
+@apply px-4 py-2.5 text-base;
+}
+
+.btn-lg {
+@apply px-6 py-3 text-lg;
+}
+
+/* ===== INPUT STYLES ===== */
+.input-base {
+@apply w-full bg-slate-900/50 border border-slate-700/50 rounded-lg px-4 py-2.5 text-slate-100 placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none;
+}
+
+input,
+textarea,
+select {
+@apply input-base;
+}
+
+/* ===== FORM ELEMENTS ===== */
+.form-group {
+@apply space-y-2;
+}
+
+.form-label {
+@apply block text-sm font-medium text-slate-300;
+}
+
+.form-error {
+@apply text-sm text-red-500 mt-1;
+}
+
+.form-hint {
+@apply text-sm text-slate-400 mt-1;
+}
+
+/* ===== TABLE STYLES ===== */
+.table-container {
+@apply overflow-x-auto rounded-xl border border-slate-700/50;
+}
+
+table {
+@apply w-full border-collapse;
+}
+
+thead {
+@apply bg-slate-900/80 border-b border-slate-700/50;
+}
+
+thead th {
+@apply px-6 py-3 text-left text-sm font-semibold text-slate-300;
+}
+
+tbody tr {
+@apply border-b border-slate-800/50 hover:bg-slate-800/30 transition-colors;
+}
+
+tbody td {
+@apply px-6 py-3 text-sm text-slate-400;
+}
+
+/* ===== BADGE STYLES ===== */
+.badge {
+@apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
+}
+
+.badge-primary {
+@apply badge bg-blue-500/20 text-blue-300;
+}
+
+.badge-success {
+@apply badge bg-emerald-500/20 text-emerald-400;
+}
+
+.badge-warning {
+@apply badge bg-yellow-500/20 text-yellow-400;
+}
+
+.badge-error {
+@apply badge bg-red-500/20 text-red-400;
+}
+
+.badge-info {
+@apply badge bg-cyan-500/20 text-cyan-300;
+}
+
+.badge-subtle {
+@apply badge bg-slate-700/50 text-slate-300;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+@apply border-t border-slate-700/50;
+}
+
+/* ===== ANIMATION CLASSES ===== */
+.fade-in {
+animation: fadeIn 0.3s ease-in-out;
+}
+
+.fade-out {
+animation: fadeOut 0.3s ease-in-out;
+}
+
+.slide-in {
+animation: slideIn 0.3s ease-out;
+}
+
+.slide-out {
+animation: slideOut 0.3s ease-in;
+}
+
+.scale-in {
+animation: scaleIn 0.3s ease-out;
+}
+
+.pulse-soft {
+animation: pulseSoft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fadeIn {
+from {
+opacity: 0;
+}
+
+to {
+opacity: 1;
+}
+}
+
+@keyframes fadeOut {
+from {
+opacity: 1;
+}
+
+to {
+opacity: 0;
+}
+}
+
+@keyframes slideIn {
+from {
+transform: translateY(10px);
+opacity: 0;
+}
+
+to {
+transform: translateY(0);
+opacity: 1;
+}
+}
+
+@keyframes slideOut {
+from {
+transform: translateY(0);
+opacity: 1;
+}
+
+to {
+transform: translateY(10px);
+opacity: 0;
+}
+}
+
+@keyframes scaleIn {
+from {
+transform: scale(0.95);
+opacity: 0;
+}
+
+to {
+transform: scale(1);
+opacity: 1;
+}
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+width: 8px;
+height: 8px;
+}
+
+::-webkit-scrollbar-track {
+@apply bg-slate-900;
+}
+
+::-webkit-scrollbar-thumb {
+@apply bg-slate-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+@apply bg-slate-600;
+}
+
+/* ===== UTILITIES ===== */
+.smooth-transition {
+@apply transition-all duration-300 ease-out;
+}
+
+.smooth-transition-fast {
+@apply transition-all duration-200 ease-out;
+}
+
+.smooth-transition-slow {
+@apply transition-all duration-500 ease-out;
+}
+
+.blur-glass {
+@apply backdrop-blur-xl;
+}
+
+.text-gradient {
+@apply bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 bg-clip-text text-transparent;
+}
+
+.glow-border {
+@apply border border-blue-500/30 shadow-lg shadow-blue-500/10;
+}
+
+.grid-pattern {
+background-image:
+linear-gradient(rgba(148, 163, 184, 0.05) 1px, transparent 1px),
+linear-gradient(90deg, rgba(148, 163, 184, 0.05) 1px, transparent 1px);
+
+background-size: 40px 40px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+h1 {
+@apply text-2xl;
+}
+
+h2 {
+@apply text-xl;
+}
+
+h3 {
+@apply text-lg;
+}
 }
