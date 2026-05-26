@@ -244,28 +244,6 @@ npm start
 
 ---
 
-# 📸 Preview Sections
-
-<div align="center">
-
-### 🖥️ Recommended Screenshots
-
-📌 Login Interface
-
-📌 Student Dashboard
-
-📌 Admin Control Panel
-
-📌 GatePass Management
-
-📌 Complaint System
-
-📌 Mobile Responsive UI
-
-</div>
-
----
-
 # 🌍 Real-World Impact
 
 This platform is designed to solve real hostel management challenges by replacing outdated manual workflows with an intelligent, secure, and fully digital ecosystem.
@@ -293,23 +271,23 @@ It improves communication, enhances security, reduces paperwork, and creates a s
 
 ---
 
-# 💼 Why This Project Impresses Recruiters
+# 🧠 Engineering Excellence Behind The Platform
 
-✅ Full-Stack MERN Architecture
+⚡ Architected using modern MERN stack principles
 
-✅ Enterprise-Level Authentication
+⚡ Built to simulate real-world smart campus infrastructure
 
-✅ Real-World Problem Solving
+⚡ Secure authentication with role-based authorization
 
-✅ Clean Scalable Folder Structure
+⚡ Modular backend designed for scalability & maintainability
 
-✅ Security-Focused Development
+⚡ Futuristic responsive UI inspired by modern SaaS products
 
-✅ Production-Ready Backend Design
+⚡ Streamlined workflows for hostel operations automation
 
-✅ Modern Frontend UI/UX
+⚡ Clean API communication between frontend & backend systems
 
-✅ Demonstrates System Design Skills
+⚡ Demonstrates practical software engineering & system design
 
 ---
 
